@@ -18,6 +18,6 @@ As an alternative to a website, you could potentially host this off your own com
   <li>Now that you have these things, go over and setup the admin panel on your website, following the instructions on the admin panel repo.</li>
   <li>Now, take osxinj, boostrap.dylib, your cheat dylib and compress it into a file named f.zip. Upload this into the loader directory in the panel.</li>
   <li>Go to line 63 of main.cpp and change the domain to whatever is needed.</li>
-  <li>Go to line 66 of main.cpp and change the paramater of login->inject to the name of your dylib which is in the f.zip file.<li>
+  <li>Go to line 66 of main.cpp and change the paramater of login->inject to the name of your dylib which is in the f.zip file.</li>
   <li>Go to line 28 of login.cppand change the domain to whatever is needed.</li>
 </ol>
