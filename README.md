@@ -21,3 +21,6 @@ As an alternative to a website, you could potentially host this off your own com
   <li>Go to line 66 of main.cpp and change the paramater of login->inject to the name of your dylib which is in the f.zip file.</li>
   <li>Go to line 28 of login.cpp and change the domain to whatever is needed.</li>
 </ol>
+
+# Credits
+<a href="https://github.com/pwnedboi/">pwned</a> for helping me with threading and multiple errors.
