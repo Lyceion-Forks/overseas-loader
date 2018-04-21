@@ -23,5 +23,5 @@ As an alternative to a website, you could potentially host this off your own com
 </ol>
 
 # Credits
-<a href="https://github.com/pwnedboi/">pwned</a> for improving the code, suggesting ideas and helping with errors.
+<a href="https://github.com/pwnedboi/">pwned</a> for improving the code, suggesting ideas and helping with errors.<br>
 <a href="https://github.com/Marc3842h/">Marc3842h</a> for telling me what I need to fix/improve.
