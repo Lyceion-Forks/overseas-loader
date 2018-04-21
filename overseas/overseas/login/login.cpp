@@ -1,124 +1,157 @@
-//
-//  login.cpp
-//  overseas
-//
-//  Copyright © 2018 levaa. All rights reserved.
-//  By using/viewing this software you agree to our MIT license.
-//
+/*
+ *
+ *
+ *
+ */
+#include "includes.h"
 
 #include "login.h"
-#include "utils.h"
-#include <curl/curl.h>
+#include "text.h"
+#include "util.h"
+#include "util_connect.h"
 
-std::string tempHwid = CUtils::exec("ioreg -rd1 -c IOPlatformExpertDevice | awk '/IOPlatformUUID/ { split($0, line, \"\\\"\"); printf(\"\\n%s\\n\\n\", line[4]); }'", false);
-
-std::string CLogin::Data::username = "";
-std::string CLogin::Data::password = "";
-std::string CLogin::Data::hwid = tempHwid.substr(1, tempHwid.length() - 3);
-std::string CLogin::Data::token = "";
-std::string CLogin::Data::error = "";
-
-bool CLogin::Data::Correct::hwid = false;
-bool CLogin::Data::Correct::hwidSet = false;
-bool CLogin::Data::Correct::inputs = false;
-
-void CLogin::checkData()
+namespace Login
 {
+    std::string username, password, hwid, token;
+}
 
-    std::string toCheck = CLogin::sendRequest("https://domain.com/moonlight/loader/checks.php",
-                                "username=" + CLogin::Data::username +
-                                "&password=" + CLogin::Data::password +
-                                "&hwid=" + CLogin::Data::hwid);
+void Login::getUserAndPass()
+{
+    // Used to check if it's the first time
+    // we've taken an input
+    bool first = true;
     
-    if(toCheck == "2oia92n" || toCheck == "kja8y2na1")
+    while(Login::username.empty() || Login::password.empty())
     {
-        // user doesnt exist
-        CLogin::Data::error = "incuop";
+        // If it's been blank multiple times
+        if(!first)
+        {
+            Text::print("Please do not leave any field empty");
+        }
+        
+        std::cout << "[loader] enter your username: ";
+        std::cin  >> Login::username;
+        
+        std::cout << "[loader] enter your password: ";
+        std::cin  >> Login::password;
+        
+        // Set first attempt to false since
+        // the loop has already run once
+        if(first)
+            first = false;
     }
-    else if(toCheck == "92i1msu71h")
+    
+    // Save original return into oResult
+    std::string oResult = Util::execute("ioreg -rd1 -c IOPlatformExpertDevice | awk '/IOPlatformUUID/ { split($0, line, \"\\\"\"); printf(\"\\n%s\\n\\n\", line[4]); }'");
+    
+    // Edit the string to remove whitespace
+    // in oResult (original result)
+    Login::hwid = oResult.substr(1, oResult.length() - 3);
+}
+
+void Login::handleFailedResponse(int code)
+{
+    // Switch through each error status code
+    switch (code)
     {
-        // incorrect hwid
-        CLogin::Data::error = "inchwid";
+        case 202:
+            Text::print("User does not exist", "error");
+            break;
+            
+        case 203:
+            Text::print("Incorrect password", "error");
+            break;
+            
+        case 204:
+            Text::print("Your HWID does not match", "error");
+            break;
+            
+        default:
+            Text::print("An unknown error has occured! Please try again later", "error");
+            break;
+    }
+}
+
+void Login::handleSuccessfulResponse(int code)
+{
+    // Switch through each success status code
+    switch (code)
+    {
+        case 205:
+            Text::print("We see this is your first login, your HWID is set.");
+            break;
+            
+        case 206:
+            Text::print("Welcome back, " + Login::username);
+            break;
+            
+        default:
+            Text::print("An unknown error has occured! Please try again later", "error");
+            break;
+    }
+}
+
+void Login::checkData()
+{
+    Text::print("Checking data...");
+    
+    // Ask the server if user is allowed
+    // to use the cheat and save result
+    std::string res = Connect::sendGet("https://domain.com/moonlight/loader/checks.php",
+                                        "username=" + Login::username + "&password=" + Login::password + "&hwid=" + Login::hwid);
+    
+    int statusCode  = -1;
+    
+    // Check if the length is longer than
+    // the usual status code meaning it
+    // also returned a token
+    if(res.length() > 3)
+    {
+        // Is a token response
+        // Explode the result into the token
+        // status code
+        std::vector<std::string> data = Util::explode(res, ':');
+        
+        // Only using a try catch just incase something is
+        // wrong with the response and its not a number
+        try
+        {
+            statusCode = stoi(data[0]);
+        }
+        catch(std::invalid_argument& e)
+        {
+            quit(EXIT_FAILURE, "An unknown error has occured! Please try again later");
+        }
+        
+        // Handle the response
+        Login::handleSuccessfulResponse(statusCode);
+        
+        // Save the token
+        Login::token = data[1];
     }
     else
     {
-        // Inputs are correct, check hwid
+        // Is a non token response meaning
+        // something went wrong
         
-        CLogin::Data::Correct::inputs = true;
+        std::string data = res;
         
-        CUtils* utils;
-        
-        std::vector<std::string> explodedData = utils->explode(toCheck, ':');
-        
-        toCheck = explodedData[0];
-        CLogin::Data::token = explodedData[1];
-        
-        if(toCheck == "iakh817b1")
+        // Only using a try catch just incase something is
+        // wrong with the response and its not a number
+        try
         {
-            // first login + set hwid
-            CLogin::Data::Correct::hwidSet = true;
+            statusCode = stoi(data);
         }
-        else if(toCheck == "sij28nak")
+        catch(std::invalid_argument& e)
         {
-            // correct hwid
-            CLogin::Data::Correct::hwid = true;
+            quit(EXIT_FAILURE, "An unknown error has occured! Please try again later");
         }
+        
+        // Handle the status code
+        Login::handleFailedResponse(statusCode);
+        
+        // Quit the program as something went
+        // wrong
+        quit(EXIT_FAILURE, "An unknown error has occured! Please try  again later");
     }
 }
-
-
-static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
-{
-    ((std::string*)userp)->append((char*)contents, size * nmemb);
-    return size * nmemb;
-}
-
-std::string CLogin::sendRequest(std::string url, std::string data)
-{
-    CURL *curl;
-    CURLcode res;
-    std::string readBuffer;
-    std::string fullRequest = url + "?" + data;
-    
-    curl = curl_easy_init();
-    
-    if(curl) {
-        curl_easy_setopt(curl, CURLOPT_URL, fullRequest.c_str());
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-        res = curl_easy_perform(curl);
-        curl_easy_cleanup(curl);
-    }
-    
-    return readBuffer;
-}
-
-void CLogin::downloadFile(std::string url, std::string name)
-{
-    std::string cmd = "mkdir ~/Applications/askdjaj2o/";
-    CUtils::exec(cmd.c_str(), false);
-    
-    cmd = "chflags hidden ~/Applications/askdjaj2o/";
-    CUtils::exec(cmd.c_str(), false);
-    
-    cmd = "cd ~/Applications/askdjaj2o/ && curl --silent -L -o '" + name + "' '" + url+ "'";
-    CUtils::exec(cmd.c_str(), false);
-    
-    cmd = "cd ~/Applications/askdjaj2o/ && unzip f.zip";
-    CUtils::exec(cmd.c_str(), false);
-    
-    cmd = "cd ~/Applications/askdjaj2o/ && chmod +x osxinj";
-    CUtils::exec(cmd.c_str(), false);
-    
-    cmd = "rm -r ~/Applications/askdjaj2o/";
-    CUtils::exec(cmd.c_str(), false);
-}
-
-void CLogin::inject(std::string dylibName)
-{
-    std::string cmd = "cd ~/Applications/askdjaj2o/ && sudo ./osxinj csgo_osx64 "
-                        + dylibName;
-    
-    CUtils::exec(cmd.c_str(), false);
-}
-

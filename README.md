@@ -16,11 +16,12 @@ As an alternative to a website, you could potentially host this off your own com
 
 <ol>
   <li>Now that you have these things, go over and setup the admin panel on your website, following the instructions on the admin panel repo.</li>
-  <li>Now, take osxinj, boostrap.dylib, your cheat dylib and compress it into a file named f.zip. Upload this into the loader directory in the panel.</li>
-  <li>Go to line 63 of main.cpp and change the domain to whatever is needed.</li>
-  <li>Go to line 66 of main.cpp and change the paramater of login->inject to the name of your dylib which is in the f.zip file.</li>
-  <li>Go to line 28 of login.cpp and change the domain to whatever is needed.</li>
+  <li>Now, take boostrap.dylib, your cheat dylib and compress it into a file named f.zip. Upload this into the loader directory in the panel.</li>
+  <li>Go to line 100 of login.cpp and change the domain to whatever is needed.</li>
+  <li>Go to line 35 of inject.cpp and change the domain to whatever is needed.</li>
+  <li>Go to line 55 and change the param of Inject::inject() to whatever the name of your dylib is inside of f.zip</li>
 </ol>
 
 # Credits
-<a href="https://github.com/pwnedboi/">pwned</a> for helping me with threading and multiple errors.
+<a href="https://github.com/pwnedboi/">pwned</a> for improving the code, suggesting ideas and helping with errors.
+<a href="https://github.com/Marc3842h/">Marc3842h</a> for telling me what I need to fix/improve.

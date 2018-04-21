@@ -1,10 +1,7 @@
-//
-//  includes.h
-//  overseas
-//
-//  Copyright © 2018 levaa. All rights reserved.
-//  By using/viewing this software you agree to our MIT license.
-//
+/*
+ *  includes.h
+ */
+#pragma once
 
 #include <ctime>
 #include <array>
@@ -23,3 +20,5 @@
 #include <libproc.h>
 
 
+
+extern const char* __progname;

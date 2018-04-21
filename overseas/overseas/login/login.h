@@ -1,36 +1,15 @@
-//
-//  login.hpp
-//  overseas
-//
-//  Copyright © 2018 levaa. All rights reserved.
-//  By using/viewing this software you agree to our MIT license.
-//
+/*
+ *  login.h
+ */
+#pragma once
 
-#include "includes.h"
-
-class CLogin
+namespace Login
 {
-public:
+    extern std::string username, password, hwid, token;    
+    
+    void getUserAndPass();
+    void handleFailedResponse(int code);
+    void handleSuccessfulResponse(int code);
     void checkData();
-    std::string sendRequest(std::string url, std::string data);
-    void downloadFile(std::string url, std::string dir);
-    void inject(std::string dylibName);
-
-    struct Data
-    {
-        static std::string error;
-        
-        static std::string username;
-        static std::string password;
-        static std::string hwid;
-        static std::string token;
-        
-        struct Correct
-        {
-            static bool inputs;
-            static bool hwid;
-            static bool hwidSet;
-        }correct;
-        
-    }data;
-};
+    void inject();    
+}

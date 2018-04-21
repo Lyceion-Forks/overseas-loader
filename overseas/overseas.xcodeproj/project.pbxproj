@@ -9,10 +9,14 @@
 /* Begin PBXBuildFile section */
 		1F7DC82D2088B7FB0033D3E3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F7DC82C2088B7FB0033D3E3 /* main.cpp */; };
 		1FB4C46B2089A3FE00AA3266 /* security.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FB4C4692089A3FE00AA3266 /* security.cpp */; };
-		1FB4C4702089B20600AA3266 /* utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FB4C46E2089B20600AA3266 /* utils.cpp */; };
+		1FB4C4702089B20600AA3266 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FB4C46E2089B20600AA3266 /* util.cpp */; };
 		1FB4C4742089B7A300AA3266 /* text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FB4C4722089B7A300AA3266 /* text.cpp */; };
 		1FB4C4792089BBDE00AA3266 /* login.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FB4C4772089BBDE00AA3266 /* login.cpp */; };
 		1FB4C47B2089C6A600AA3266 /* libcurl.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FB4C47A2089C6A600AA3266 /* libcurl.4.dylib */; };
+		1FC34B5B208AF99B000C56DE /* injector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1FC34B5A208AF99B000C56DE /* injector.cpp */; };
+		1FC34B5F208AF9E7000C56DE /* mach_inject.c in Sources */ = {isa = PBXBuildFile; fileRef = 1FC34B5D208AF9E7000C56DE /* mach_inject.c */; };
+		B685DC34208A17F300D19724 /* util_connect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B685DC32208A17F300D19724 /* util_connect.cpp */; };
+		B685DC38208A1E8D00D19724 /* inject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B685DC36208A1E8D00D19724 /* inject.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,13 +37,21 @@
 		1F7DC8332088B84E0033D3E3 /* includes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = includes.h; sourceTree = "<group>"; };
 		1FB4C4692089A3FE00AA3266 /* security.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = security.cpp; sourceTree = "<group>"; };
 		1FB4C46A2089A3FE00AA3266 /* security.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = security.h; sourceTree = "<group>"; };
-		1FB4C46E2089B20600AA3266 /* utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = utils.cpp; sourceTree = "<group>"; };
-		1FB4C46F2089B20600AA3266 /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		1FB4C46E2089B20600AA3266 /* util.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
+		1FB4C46F2089B20600AA3266 /* util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 		1FB4C4722089B7A300AA3266 /* text.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = text.cpp; sourceTree = "<group>"; };
 		1FB4C4732089B7A300AA3266 /* text.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = text.h; sourceTree = "<group>"; };
 		1FB4C4772089BBDE00AA3266 /* login.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = login.cpp; sourceTree = "<group>"; };
 		1FB4C4782089BBDE00AA3266 /* login.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = login.h; sourceTree = "<group>"; };
 		1FB4C47A2089C6A600AA3266 /* libcurl.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.4.dylib; path = ../../../../../usr/lib/libcurl.4.dylib; sourceTree = "<group>"; };
+		1FC34B5A208AF99B000C56DE /* injector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = injector.cpp; sourceTree = "<group>"; };
+		1FC34B5C208AF9A4000C56DE /* injector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = injector.h; sourceTree = "<group>"; };
+		1FC34B5D208AF9E7000C56DE /* mach_inject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mach_inject.c; sourceTree = "<group>"; };
+		1FC34B5E208AF9E7000C56DE /* mach_inject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mach_inject.h; sourceTree = "<group>"; };
+		B685DC32208A17F300D19724 /* util_connect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = util_connect.cpp; sourceTree = "<group>"; };
+		B685DC33208A17F300D19724 /* util_connect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util_connect.h; sourceTree = "<group>"; };
+		B685DC36208A1E8D00D19724 /* inject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = inject.cpp; sourceTree = "<group>"; };
+		B685DC37208A1E8D00D19724 /* inject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = inject.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,12 +94,13 @@
 		1F7DC82B2088B7FB0033D3E3 /* overseas */ = {
 			isa = PBXGroup;
 			children = (
-				1FB4C4762089BB1E00AA3266 /* login */,
-				1FB4C4712089B79900AA3266 /* text */,
-				1FB4C46D2089B1FA00AA3266 /* util */,
-				1FB4C4682089A3F000AA3266 /* security */,
 				1F7DC82C2088B7FB0033D3E3 /* main.cpp */,
 				1F7DC8332088B84E0033D3E3 /* includes.h */,
+				1FB4C4712089B79900AA3266 /* text */,
+				B685DC35208A1E7E00D19724 /* inject */,
+				1FB4C4762089BB1E00AA3266 /* login */,
+				1FB4C46D2089B1FA00AA3266 /* util */,
+				1FB4C4682089A3F000AA3266 /* security */,
 			);
 			path = overseas;
 			sourceTree = "<group>";
@@ -104,8 +117,10 @@
 		1FB4C46D2089B1FA00AA3266 /* util */ = {
 			isa = PBXGroup;
 			children = (
-				1FB4C46E2089B20600AA3266 /* utils.cpp */,
-				1FB4C46F2089B20600AA3266 /* utils.h */,
+				1FB4C46E2089B20600AA3266 /* util.cpp */,
+				1FB4C46F2089B20600AA3266 /* util.h */,
+				B685DC32208A17F300D19724 /* util_connect.cpp */,
+				B685DC33208A17F300D19724 /* util_connect.h */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -126,6 +141,27 @@
 				1FB4C4782089BBDE00AA3266 /* login.h */,
 			);
 			path = login;
+			sourceTree = "<group>";
+		};
+		1FC34B59208AF989000C56DE /* osxinj */ = {
+			isa = PBXGroup;
+			children = (
+				1FC34B5D208AF9E7000C56DE /* mach_inject.c */,
+				1FC34B5E208AF9E7000C56DE /* mach_inject.h */,
+				1FC34B5A208AF99B000C56DE /* injector.cpp */,
+				1FC34B5C208AF9A4000C56DE /* injector.h */,
+			);
+			path = osxinj;
+			sourceTree = "<group>";
+		};
+		B685DC35208A1E7E00D19724 /* inject */ = {
+			isa = PBXGroup;
+			children = (
+				1FC34B59208AF989000C56DE /* osxinj */,
+				B685DC36208A1E8D00D19724 /* inject.cpp */,
+				B685DC37208A1E8D00D19724 /* inject.h */,
+			);
+			path = inject;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,10 +221,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FB4C4702089B20600AA3266 /* utils.cpp in Sources */,
+				B685DC34208A17F300D19724 /* util_connect.cpp in Sources */,
+				1FB4C4702089B20600AA3266 /* util.cpp in Sources */,
 				1F7DC82D2088B7FB0033D3E3 /* main.cpp in Sources */,
+				1FC34B5B208AF99B000C56DE /* injector.cpp in Sources */,
 				1FB4C4742089B7A300AA3266 /* text.cpp in Sources */,
 				1FB4C46B2089A3FE00AA3266 /* security.cpp in Sources */,
+				1FC34B5F208AF9E7000C56DE /* mach_inject.c in Sources */,
+				B685DC38208A1E8D00D19724 /* inject.cpp in Sources */,
 				1FB4C4792089BBDE00AA3266 /* login.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

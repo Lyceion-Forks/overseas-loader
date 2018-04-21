@@ -10,12 +10,15 @@
 
 class CSecurity
 {
-public:
-    static void securityThread();
+private:
     
     static bool isBeingDebugged();
     static bool fiddlerIsActive();
-
+    
+public:
+    
+    static void securityThread();
+    
 };
 
 

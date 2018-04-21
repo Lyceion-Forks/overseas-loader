@@ -1,20 +1,16 @@
-//
-//  text.hpp
-//  overseas
-//
-//  Copyright © 2018 levaa. All rights reserved.
-//  By using/viewing this software you agree to our MIT license.
-//
+/*
+ *  text.h
+ */
+#pragma once
 
-#include "includes.h"
-
-class CText
+namespace Text
 {
-public:
-    void printASCII();
-    void print(std::string message, int c = 0);
+    void printLogo();
     void divider();
     
-    void askInputs();
-    
-};
+    template<class T>
+    void print(T body, std::string prefix = "loader")
+    {
+        std::cout << "[" + prefix + "] " << body << std::endl;
+    }
+}

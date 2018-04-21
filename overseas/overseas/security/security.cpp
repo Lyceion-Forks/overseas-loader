@@ -6,25 +6,26 @@
 //  By using/viewing this software you agree to our MIT license.
 //
 
+#include "includes.h"
 #include "security.h"
-#include "utils.h"
-
-bool shouldExit = false;
+#include "util.h"
 
 void CSecurity::securityThread()
 {
-    while(!shouldExit)
+    // Continues to loop while the program
+    // runs to check if it's being debugged
+    // or web debugged
+    
+    while(true)
     {
         if(CSecurity::isBeingDebugged())
-           shouldExit = true;
+            quit(EXIT_FAILURE, "Debugger attached");
         
         if(CSecurity::fiddlerIsActive())
-            shouldExit = true;
+            quit(EXIT_FAILURE, "Fiddler is active");
         
         sleep(2);
     }
-    
-    exit(EXIT_FAILURE);
 }
 
 bool CSecurity::isBeingDebugged()
@@ -52,9 +53,6 @@ bool CSecurity::isBeingDebugged()
 
 bool CSecurity::fiddlerIsActive()
 {
-    if(CUtils::isProcessActive("Fiddler"))
-        return true;
-    
-    return false;
+    return Util::doesProcessExist("Fiddler");
 }
 
