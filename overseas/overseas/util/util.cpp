@@ -10,8 +10,10 @@
 
 void quit(int code, std::string reason)
 {
+#ifdef CAKED
     if(!reason.empty() && code == EXIT_FAILURE)
         Text::print(reason, "error");
+#endif
     exit(code);
 }
 
