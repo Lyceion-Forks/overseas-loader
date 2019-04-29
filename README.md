@@ -14,7 +14,7 @@ First of all, you'll need a few things.
   <li>A website capable of hosting the moonlight admin panel</li>
 </ul>
 
-As an alternative to a website, you could potentially host this off your own computer, look into XAMPP <a href="https://www.apachefriends.org/download.html">here</a>. However, I do not recommend this as it's a huge security risk and overall stupid.
+As an alternative to a website, you could potentially host this off your own computer, look into XAMPP <a href="https://www.apachefriends.org/download.html">here</a>. However, I do not recommend this as it is a potential security risk given the relatively poor security of the corresponding admin panel.
 
 <ol>
   <li>Now that you have these things, go over and setup the admin panel on your website, following the instructions on the admin panel repo.</li>
